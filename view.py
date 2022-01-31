@@ -25,6 +25,9 @@ class View(QMainWindow):
         self.b_init.clicked.connect(c.init)
         self.app = app
 
+    def updateConsole(self, text):
+        self.console.append(text)
+
     def getTimer(self):
         """
         Return the User specified Launchtimer
@@ -43,7 +46,7 @@ class View(QMainWindow):
             self.app.processEvents()
             self.lcdNumber.display(i)
 
-        print('hello world')
+        print('boom')
 
     def enableButtons(self):
         self.b_launch.setEnabled(True)

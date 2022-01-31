@@ -1,5 +1,8 @@
 import sys
 from threading import Thread
+
+from PyQt6.QtCore import QThread
+
 import constant
 from PyQt6.QtWidgets import QApplication
 
@@ -12,8 +15,10 @@ class Controller:
         """
         Setup references to the Model and View
         """
+        self.thread1 = QThread()
         self.m = model.Model()
         self.v = view.View(self, app)
+        self.readArduino()
 
     def ejection(self):
         """
@@ -28,6 +33,7 @@ class Controller:
         """
         self.m.initMode()
         print(self.m.readFromArduino())
+        print('hello')
         self.v.enableButtons()
 
     def launch(self):
@@ -49,6 +55,10 @@ class Controller:
         :return:
         """
         self.m.abort()
+
+    def readArduino(self):
+        self.thread1.started.connect(self.v.updateConsole(self.m.readFromArduino()))
+        self.thread1.start()
 
 
 if __name__ == '__main__':

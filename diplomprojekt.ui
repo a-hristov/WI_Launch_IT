@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1103</width>
-    <height>673</height>
+    <height>675</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,10 +23,13 @@
       <property name="spacing">
        <number>12</number>
       </property>
-      <item row="2" column="0" rowspan="6">
+      <item row="6" column="4" rowspan="5" colspan="2">
+       <widget class="QGraphicsView" name="w_plot2"/>
+      </item>
+      <item row="2" column="0" rowspan="4">
        <widget class="QLCDNumber" name="lcdNumber"/>
       </item>
-      <item row="11" column="0">
+      <item row="9" column="0">
        <widget class="QPushButton" name="b_ejection">
         <property name="enabled">
          <bool>false</bool>
@@ -39,30 +42,7 @@
         </property>
        </widget>
       </item>
-      <item row="9" column="0">
-       <widget class="QPushButton" name="b_launch">
-        <property name="styleSheet">
-         <string notr="true">color: rgb(255, 255, 255);</string>
-        </property>
-        <property name="text">
-         <string>Initiate Takeoff in 2min</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1" rowspan="13">
-       <widget class="QGraphicsView" name="graphicsView_2"/>
-      </item>
-      <item row="7" column="4" colspan="2">
-       <widget class="QGraphicsView" name="w_plot1">
-        <property name="frameShadow">
-         <enum>QFrame::Plain</enum>
-        </property>
-        <property name="midLineWidth">
-         <number>1</number>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="2" rowspan="2" colspan="2">
+      <item row="3" column="2" rowspan="2" colspan="2">
        <widget class="QLabel" name="label_5">
         <property name="font">
          <font>
@@ -84,7 +64,20 @@ background-color: rgb(255, 0, 0);</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="2" rowspan="5" colspan="2">
+      <item row="7" column="0">
+       <widget class="QPushButton" name="b_launch">
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);</string>
+        </property>
+        <property name="text">
+         <string>Initiate Takeoff in 2min</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1" rowspan="11">
+       <widget class="QGraphicsView" name="graphicsView_2"/>
+      </item>
+      <item row="0" column="2" rowspan="3" colspan="2">
        <widget class="QLabel" name="label_3">
         <property name="maximumSize">
          <size>
@@ -110,17 +103,20 @@ background-color: rgb(255, 0, 0);</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="4" rowspan="7" colspan="2">
-       <widget class="QLabel" name="l_console">
-        <property name="text">
-         <string>TextLabel</string>
+      <item row="5" column="4" colspan="2">
+       <widget class="QGraphicsView" name="w_plot1">
+        <property name="frameShadow">
+         <enum>QFrame::Plain</enum>
+        </property>
+        <property name="midLineWidth">
+         <number>1</number>
         </property>
        </widget>
       </item>
-      <item row="7" column="2" rowspan="6" colspan="2">
+      <item row="5" column="2" rowspan="6" colspan="2">
        <widget class="QGraphicsView" name="graphicsView_3"/>
       </item>
-      <item row="12" column="0">
+      <item row="10" column="0">
        <widget class="QPushButton" name="exit">
         <property name="styleSheet">
          <string notr="true">color: rgb(255, 255, 255);</string>
@@ -130,7 +126,7 @@ background-color: rgb(255, 0, 0);</string>
         </property>
        </widget>
       </item>
-      <item row="8" column="0">
+      <item row="6" column="0">
        <widget class="QPushButton" name="b_init">
         <property name="styleSheet">
          <string notr="true">color: rgb(255, 255, 255);</string>
@@ -147,7 +143,7 @@ background-color: rgb(255, 0, 0);</string>
         </property>
        </widget>
       </item>
-      <item row="10" column="0">
+      <item row="8" column="0">
        <widget class="QPushButton" name="b_abort">
         <property name="styleSheet">
          <string notr="true">
@@ -158,8 +154,12 @@ color: rgb(255, 255, 255);</string>
         </property>
        </widget>
       </item>
-      <item row="8" column="4" rowspan="5" colspan="2">
-       <widget class="QGraphicsView" name="w_plot2"/>
+      <item row="0" column="4" rowspan="5" colspan="2">
+       <widget class="QLabel" name="console">
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
