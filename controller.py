@@ -57,7 +57,7 @@ class Controller:
         self.m.abort()
 
     def readArduino(self):
-        t1 = Thread(self.readArduino2)
+        t1 = Thread(target=self.readArduino2)
         t1.start()
 
     def readArduino2(self):
