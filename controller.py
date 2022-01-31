@@ -2,7 +2,7 @@ import sys
 import time
 from threading import Thread
 
-from PyQt6.QtCore import QThread
+from PyQt6.QtCore import QThread, pyqtSignal, QObject
 
 import constant
 from PyQt6.QtWidgets import QApplication
@@ -11,11 +11,15 @@ import model
 import view
 
 
-class Controller:
+class Controller(QObject):
+    finished = pyqtSignal()
+    progress = pyqtSignal(int)
+
     def __init__(self, app):
         """
         Setup references to the Model and View
         """
+
         self.thread1 = QThread()
         self.m = model.Model()
         self.v = view.View(self, app)
@@ -26,6 +30,13 @@ class Controller:
         Method to execute the Models chuteEjecton method
         """
         self.m.chuteEjection()
+
+    def run(self):
+        self.v.updateConsole(self.m.readFromArduino())
+        for i in range(5):
+            time.sleep(1)
+            self.progress.emit(i + 1)
+        self.finished.emit()
 
     def init(self):
         """
@@ -46,7 +57,7 @@ class Controller:
         # self.m.launchWithTimer(int(self.v.getTimer()))
         # self.v.setLcdNumber(int(self.v.getTimer()))
         # t1 = Thread(target=self.m.launchWithTimer(int(self.v.getTimer())))
-        t2 = Thread(target=self.v.setLcdNumber(constant.LAUNCH_TIME-1))
+        t2 = Thread(target=self.v.setLcdNumber(constant.LAUNCH_TIME - 1))
         t2.start()
         # t1.start()
 
@@ -57,6 +68,8 @@ class Controller:
         """
         self.m.abort()
 
+
+'''
     def readArduino(self):
         self.thread1.started.connect(self.readArduino2)
         self.thread1.start()
@@ -65,7 +78,7 @@ class Controller:
         while True:
             time.sleep(1)
             self.v.updateConsole(self.m.readFromArduino())
-
+'''
 
 if __name__ == '__main__':
     """

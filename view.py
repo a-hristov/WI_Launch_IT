@@ -1,6 +1,7 @@
 import time
 
 from PyQt6 import uic
+from PyQt6.QtCore import QThread
 from PyQt6.QtWidgets import QMainWindow, QApplication
 from pip._vendor.msgpack.fallback import xrange
 
@@ -24,6 +25,31 @@ class View(QMainWindow):
         self.b_abort.setEnabled(False)
         self.b_init.clicked.connect(c.init)
         self.app = app
+
+    def runLongTask(self):
+        # Step 2: Create a QThread object
+        self.thread = QThread()
+        # Step 3: Create a worker object
+        self.worker = self.c()
+        # Step 4: Move worker to the thread
+        self.worker.moveToThread(self.thread)
+        # Step 5: Connect signals and slots
+        self.thread.started.connect(self.worker.run)
+        self.worker.finished.connect(self.thread.quit)
+        self.worker.finished.connect(self.worker.deleteLater)
+        self.thread.finished.connect(self.thread.deleteLater)
+        self.worker.progress.connect(self.reportProgress)
+        # Step 6: Start the thread
+        self.thread.start()
+
+        # Final resets
+        self.longRunningBtn.setEnabled(False)
+        self.thread.finished.connect(
+            lambda: self.longRunningBtn.setEnabled(True)
+        )
+        self.thread.finished.connect(
+            lambda: self.stepLabel.setText("Long-Running Step: 0")
+        )
 
     def updateConsole(self, text):
         self.console.append(str(text))
