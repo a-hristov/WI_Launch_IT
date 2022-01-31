@@ -30,7 +30,7 @@ class View(QMainWindow):
         # Step 2: Create a QThread object
         self.thread = QThread()
         # Step 3: Create a worker object
-        self.worker = Controller()
+        self.worker = Controller(self.app)
         # Step 4: Move worker to the thread
         self.worker.moveToThread(self.thread)
         # Step 5: Connect signals and slots
