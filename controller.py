@@ -57,8 +57,8 @@ class Controller:
         self.m.abort()
 
     def readArduino(self):
-        self.thread1.started.connect(self.v.updateConsole('self.m.readFromArduino()'))
-        self.thread1.start()
+        t1 = Thread(self.v.updateConsole(self.m.readFromArduino()))
+        t1.start()
 
 
 if __name__ == '__main__':
