@@ -18,7 +18,7 @@ class Controller:
         self.thread1 = QThread()
         self.m = model.Model()
         self.v = view.View(self, app)
-        # self.readArduino()
+        self.readArduino()
 
     def ejection(self):
         """
@@ -57,12 +57,13 @@ class Controller:
         self.m.abort()
 
     def readArduino(self):
-        t1 = Thread(self.readArduino2())
+        t1 = Thread(self.readArduino2)
         t1.start()
 
     def readArduino2(self):
         while True:
             self.v.updateConsole(self.m.readFromArduino())
+
 
 if __name__ == '__main__':
     """
