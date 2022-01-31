@@ -15,8 +15,13 @@ class View(QMainWindow):
         """
         super().__init__()
         uic.loadUi("diplomprojekt.ui", self)
+
         self.b_launch.clicked.connect(c.launch)
+        self.b_launch.setEnabled(False)
         self.b_ejection.clicked.connect(c.ejection)
+        self.b_ejection.setEnabled(False)
+        self.b_abort.clicked.connect(c.abort)
+        self.b_abort.setEnabled(False)
         self.b_init.clicked.connect(c.init)
         self.app = app
 
@@ -38,10 +43,14 @@ class View(QMainWindow):
             self.app.processEvents()
             self.lcdNumber.display(i)
 
+        print('hello world')
 
-        print('helloworld')
+    def enableButtons(self):
+        self.b_launch.setEnabled(True)
+        self.b_ejection.setEnabled(True)
+        self.b_abort.setEnabled(True)
 
-    """
+"""
     def setConsole(self,x:str):
         self.l_console.text(x)
     """

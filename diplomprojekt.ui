@@ -104,40 +104,26 @@ background-color: rgb(255, 0, 0);</string>
       <item row="7" column="2" rowspan="5" colspan="2">
        <widget class="QGraphicsView" name="graphicsView_3"/>
       </item>
-      <item row="7" column="0">
-       <widget class="QLCDNumber" name="lcdNumber"/>
-      </item>
       <item row="9" column="0">
        <widget class="QPushButton" name="b_launch">
         <property name="styleSheet">
          <string notr="true">color: rgb(255, 255, 255);</string>
         </property>
         <property name="text">
-         <string>Launch Timer + abort</string>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="0">
-       <widget class="QLineEdit" name="lineEdit">
-        <property name="styleSheet">
-         <string notr="true">color: rgb(255, 255, 255);</string>
+         <string>Initiate Takeoff in 2min</string>
         </property>
        </widget>
       </item>
       <item row="10" column="0">
        <widget class="QPushButton" name="b_ejection">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="styleSheet">
          <string notr="true">color: rgb(255, 255, 255);</string>
         </property>
         <property name="text">
          <string>Chute ejection</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Rocket Status / Launchpad Status&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
       </item>
@@ -153,6 +139,16 @@ background-color: rgb(255, 0, 0);</string>
          <string>INIT</string>
         </property>
        </widget>
+      </item>
+      <item row="0" column="0" rowspan="2">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Rocket Status / Launchpad Status&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0" rowspan="6">
+       <widget class="QLCDNumber" name="lcdNumber"/>
       </item>
      </layout>
     </item>

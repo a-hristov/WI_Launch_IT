@@ -1,6 +1,7 @@
 import time
-
+import constant
 import serial
+import datetime
 
 
 class Model:
@@ -9,7 +10,8 @@ class Model:
         """
         arduino: the serial port on which the arduino is connected to the computer
         """
-        self.arduino = serial.Serial(port='COM8', baudrate=9600, timeout=.1)
+        # self.arduino = serial.Serial(port='COM8', baudrate=9600, timeout=.1)
+        # Comment this line if you want to test GUI
 
     def writeToArduino(self, x: str):
         """
@@ -26,13 +28,13 @@ class Model:
         """
         return self.arduino.readline()
 
-    def launchWithTimer(self, timer):
+    def launchWithTimer(self):
         """
         Send a 'Launch' String to the Serial Port after a certain amount of time
         :param timer: the amount of time
         """
-        time.sleep(timer)
-        self.writeToArduino('Launch')
+
+        self.writeToArduino('initiate countdown ', (datetime.datetime.now() + datetime.timedelta(seconds=constant.LAUNCH_TIME)).strftime("%H:%M:%S"))
 
     def chuteEjection(self):
         """
@@ -48,8 +50,24 @@ class Model:
         """
         self.writeToArduino('init')
 
+    def abort(self):
+        """
+        Write an 'abort' String to the Arduino in order to abort the launch
+        :return:
+        """
+        self.writeToArduino('abort')
+
 
 if __name__ == '__main__':
+    '''
     m = Model()
     while True:
-        print(m.readFromArduino())
+        print(m.readFromArduino())'''
+    now = datetime.datetime.now()
+
+    current_time = now.strftime("%H:%M:%S")
+    print("Current Time =", current_time)
+    tc = datetime.timedelta(seconds=constant.LAUNCH_TIME)
+    now2 = datetime.datetime.now() + datetime.timedelta(seconds=constant.LAUNCH_TIME)
+    current_time2 = (datetime.datetime.now() + datetime.timedelta(seconds=constant.LAUNCH_TIME)).strftime("%H:%M:%S")
+    print("Current Time =", (datetime.datetime.now() + datetime.timedelta(seconds=constant.LAUNCH_TIME)).strftime("%H:%M:%S"))
