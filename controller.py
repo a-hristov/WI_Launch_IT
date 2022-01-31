@@ -26,8 +26,8 @@ class Controller:
         Method to execute the models initMode method
         :return:
         """
-        # self.m.initMode()
-        # print(self.m.readFromArduino())
+        self.m.initMode()
+        print(self.m.readFromArduino())
         self.v.enableButtons()
 
     def launch(self):
