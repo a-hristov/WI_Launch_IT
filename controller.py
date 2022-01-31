@@ -23,7 +23,7 @@ class Controller(QObject):
         self.thread1 = QThread()
         self.m = model.Model()
         self.v = view.View(self, app)
-        self.v.runLongTask()
+        self.v.runLongTask(self)
 
     def ejection(self):
         """
