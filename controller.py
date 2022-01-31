@@ -44,7 +44,6 @@ class Controller():
         """
         self.m.initMode()
         print(self.m.readFromArduino())
-        print('hello')
         self.v.enableButtons()
 
     def launch(self):

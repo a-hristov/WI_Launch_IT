@@ -80,3 +80,5 @@ if __name__ == '__main__':
     while True:
         time.sleep(0.5)
         print(m.readFromArduino())
+        m.writeToArduino('init')
+
