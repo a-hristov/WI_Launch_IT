@@ -15,6 +15,8 @@ class View(QMainWindow):
         :param c: the reference to the Controller
         """
         super().__init__()
+        self.worker = c
+        self.thread = QThread()
         uic.loadUi("diplomprojekt.ui", self)
 
         self.b_launch.clicked.connect(c.launch)
@@ -28,9 +30,7 @@ class View(QMainWindow):
 
     def runLongTask(self):
         # Step 2: Create a QThread object
-        self.thread = QThread()
         # Step 3: Create a worker object
-        self.worker = self.c()
         # Step 4: Move worker to the thread
         self.worker.moveToThread(self.thread)
         # Step 5: Connect signals and slots
