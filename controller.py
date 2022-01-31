@@ -39,7 +39,7 @@ class Controller:
         # self.m.launchWithTimer(int(self.v.getTimer()))
         # self.v.setLcdNumber(int(self.v.getTimer()))
         # t1 = Thread(target=self.m.launchWithTimer(int(self.v.getTimer())))
-        t2 = Thread(target=self.v.setLcdNumber(constant.LAUNCH_TIME))
+        t2 = Thread(target=self.v.setLcdNumber(constant.LAUNCH_TIME-1))
         t2.start()
         # t1.start()
 

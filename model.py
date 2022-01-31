@@ -10,7 +10,15 @@ class Model:
         """
         arduino: the serial port on which the arduino is connected to the computer
         """
-        self.arduino = serial.Serial(port='COM8', baudrate=9600, timeout=.1)
+        try:
+            self.arduino = serial.Serial(port='COM6', baudrate=9600, timeout=.1)
+        except serial.SerialException as e:
+            print('Could not connect with the Controller, make sure that you have selected the right port or that the device is plugged in.')
+            return None
+        except TypeError as e:
+            self.port.close()
+            print('error2')
+            return None
         # Comment this line if you want to test GUI
 
     def writeToArduino(self, x: str):
@@ -31,10 +39,12 @@ class Model:
     def launchWithTimer(self):
         """
         Send a 'Launch' String to the Serial Port after a certain amount of time
-        :param timer: the amount of time
         """
-
-        self.writeToArduino('initiate countdown ', (datetime.datetime.now() + datetime.timedelta(seconds=constant.LAUNCH_TIME)).strftime("%H:%M:%S"))
+        try:
+            self.writeToArduino('initiate countdown' + (datetime.datetime.now() + datetime.timedelta(seconds=constant.LAUNCH_TIME)).strftime("%H:%M:%S"))
+        except AttributeError as e:
+            print('The Controller is not connected to the Computer')
+            return None
 
     def chuteEjection(self):
         """
@@ -63,11 +73,6 @@ if __name__ == '__main__':
     m = Model()
     while True:
         print(m.readFromArduino())'''
-    now = datetime.datetime.now()
 
-    current_time = now.strftime("%H:%M:%S")
-    print("Current Time =", current_time)
-    tc = datetime.timedelta(seconds=constant.LAUNCH_TIME)
-    now2 = datetime.datetime.now() + datetime.timedelta(seconds=constant.LAUNCH_TIME)
-    current_time2 = (datetime.datetime.now() + datetime.timedelta(seconds=constant.LAUNCH_TIME)).strftime("%H:%M:%S")
-    print("Current Time =", (datetime.datetime.now() + datetime.timedelta(seconds=constant.LAUNCH_TIME)).strftime("%H:%M:%S"))
+    # print('initiate countdown', (datetime.datetime.now() + datetime.timedelta(seconds=constant.LAUNCH_TIME)).strftime("%H:%M:%S"))
+    Model().launchWithTimer()
