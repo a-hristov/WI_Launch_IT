@@ -1,4 +1,5 @@
 import sys
+import time
 from threading import Thread
 
 from PyQt6.QtCore import QThread
@@ -62,6 +63,7 @@ class Controller:
 
     def readArduino2(self):
         while True:
+            time.sleep(0.05)
             self.v.updateConsole(self.m.readFromArduino())
 
 
