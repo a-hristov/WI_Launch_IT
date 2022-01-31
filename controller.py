@@ -57,9 +57,12 @@ class Controller:
         self.m.abort()
 
     def readArduino(self):
-        t1 = Thread(self.v.updateConsole(self.m.readFromArduino()))
+        t1 = Thread(self.readArduino2())
         t1.start()
 
+    def readArduino2(self):
+        while True:
+            self.v.updateConsole(self.m.readFromArduino())
 
 if __name__ == '__main__':
     """
