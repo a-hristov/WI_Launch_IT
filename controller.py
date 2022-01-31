@@ -13,7 +13,6 @@ import view
 
 class Controller():
 
-
     def __init__(self, app):
         """
         Setup references to the Model and View

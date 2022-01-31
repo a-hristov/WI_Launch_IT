@@ -34,7 +34,7 @@ class Model:
         returns the received data from the arduino
         :return: the received data
         """
-        return self.arduino.readline()
+        return self.arduino.readline(eol=b'\r\n')
 
     def launchWithTimer(self):
         """
