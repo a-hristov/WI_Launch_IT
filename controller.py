@@ -11,9 +11,8 @@ import model
 import view
 
 
-class Controller(QObject):
-    finished = pyqtSignal()
-    progress = pyqtSignal(int)
+class Controller():
+
 
     def __init__(self, app):
         """

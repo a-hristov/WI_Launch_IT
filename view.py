@@ -1,11 +1,23 @@
 import time
 
 from PyQt6 import uic
-from PyQt6.QtCore import QThread
+from PyQt6.QtCore import QThread, QObject, pyqtSignal
 from PyQt6.QtWidgets import QMainWindow, QApplication
 from pip._vendor.msgpack.fallback import xrange
 
 from controller import Controller
+
+
+class Worker(QObject):
+    finished = pyqtSignal()
+    progress = pyqtSignal(int)
+
+    def run(self):
+        """Long-running task."""
+        for i in range(5):
+            time.sleep(1)
+            self.progress.emit(i + 1)
+        self.finished.emit()
 
 
 class View(QMainWindow):
@@ -30,7 +42,7 @@ class View(QMainWindow):
         # Step 2: Create a QThread object
         self.thread = QThread()
         # Step 3: Create a worker object
-        self.worker = Controller(self.app)
+        self.worker = Worker()
         # Step 4: Move worker to the thread
         self.worker.moveToThread(self.thread)
         # Step 5: Connect signals and slots
@@ -38,18 +50,18 @@ class View(QMainWindow):
         self.worker.finished.connect(self.thread.quit)
         self.worker.finished.connect(self.worker.deleteLater)
         self.thread.finished.connect(self.thread.deleteLater)
-        self.worker.progress.connect(self.reportProgress)
+        #self.worker.progress.connect(self.reportProgress)
         # Step 6: Start the thread
         self.thread.start()
 
         # Final resets
-        self.longRunningBtn.setEnabled(False)
-        self.thread.finished.connect(
-            lambda: self.longRunningBtn.setEnabled(True)
-        )
-        self.thread.finished.connect(
-            lambda: self.stepLabel.setText("Long-Running Step: 0")
-        )
+        #self.longRunningBtn.setEnabled(False)
+        #self.thread.finished.connect(
+        #    lambda: self.longRunningBtn.setEnabled(True)
+        #)
+        #self.thread.finished.connect(
+        #    lambda: self.stepLabel.setText("Long-Running Step: 0")
+        #)
 
     def updateConsole(self, text):
         self.console.append(str(text))
@@ -79,11 +91,11 @@ class View(QMainWindow):
         self.b_ejection.setEnabled(True)
         self.b_abort.setEnabled(True)
 
+
 """
     def setConsole(self,x:str):
         self.l_console.text(x)
     """
-
 
 if __name__ == '__main__':
     import sys

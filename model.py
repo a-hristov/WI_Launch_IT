@@ -11,7 +11,7 @@ class Model:
         arduino: the serial port on which the arduino is connected to the computer
         """
         try:
-            self.arduino = serial.Serial(port='COM6', baudrate=9600, timeout=.1)
+            self.arduino = serial.Serial(port='COM3', baudrate=9600, timeout=.1)
         except serial.SerialException as e:
             print('Could not connect with the Controller, make sure that you have selected the right port or that the device is plugged in.')
             return None
