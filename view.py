@@ -26,7 +26,7 @@ class View(QMainWindow):
         self.app = app
 
     def updateConsole(self, text):
-        self.console.append(text)
+        self.console.append(str(text))
 
     def getTimer(self):
         """
