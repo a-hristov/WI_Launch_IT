@@ -57,7 +57,7 @@ class Controller:
         self.m.abort()
 
     def readArduino(self):
-        self.thread1.started.connect(self.v.updateConsole(self.m.readFromArduino()))
+        self.thread1.started.connect(self.v.updateConsole('self.m.readFromArduino()'))
         self.thread1.start()
 
 
