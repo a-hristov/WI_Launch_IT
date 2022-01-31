@@ -18,7 +18,7 @@ class Controller:
         self.thread1 = QThread()
         self.m = model.Model()
         self.v = view.View(self, app)
-        self.readArduino()
+        # self.readArduino()
 
     def ejection(self):
         """
