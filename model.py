@@ -69,10 +69,14 @@ class Model:
 
 
 if __name__ == '__main__':
-    '''
+
     m = Model()
+    '''
     while True:
         print(m.readFromArduino())'''
 
     # print('initiate countdown', (datetime.datetime.now() + datetime.timedelta(seconds=constant.LAUNCH_TIME)).strftime("%H:%M:%S"))
-    Model().launchWithTimer()
+    #Model().launchWithTimer()
+    while True:
+        time.sleep(0.5)
+        print(m.readFromArduino())
