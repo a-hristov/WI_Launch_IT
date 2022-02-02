@@ -22,6 +22,7 @@ class Worker(QObject):
     finished = pyqtSignal()
     progress = pyqtSignal(int)
 
+
     def run(self, v):
         while True:
             time.sleep(1)

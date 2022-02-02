@@ -104,6 +104,7 @@ class Controller():
     def readArduino2(self):
         while True:
             time.sleep(1)
+            
             self.v.updateConsole(self.m.readFromArduino())
 '''
 

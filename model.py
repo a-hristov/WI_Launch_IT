@@ -73,6 +73,7 @@ if __name__ == '__main__':
     while True:
         print(m.readFromArduino())'''
 
+
     # print('initiate countdown', (datetime.datetime.now() + datetime.timedelta(seconds=constant.LAUNCH_TIME)).strftime("%H:%M:%S"))
     # Model().launchWithTimer()
     while True:
