@@ -69,6 +69,36 @@ class Controller():
             print('test')
             self.v.updateConsole(self.m.readFromArduino())
 
+    def check_serial_event(self):
+        self.timeout = 0
+
+        self.timeout += 1
+        # print (self.timeout)
+        serial_thread = threading.Timer(1, self.check_serial_event)
+        if self.m.arduino.is_open == True:
+            serial_thread.start()
+            if self.m.arduino.in_waiting:
+                eol = b'\n'
+                leneol = len(eol)
+                line = bytearray()
+                while True:
+                    c = self.m.arduino.read(1)
+                    if c:
+                        line += c
+                        if line[-leneol:] == eol:
+                            break
+                    else:
+                        break
+                    # print (line)
+                    # print (type(line))
+                line = line.rstrip()
+                distance = line.decode("utf-8")
+                self.v.console.append(distance + '\n')
+                # print (distance)
+                self.timeout = 0
+
+        if self.timeout >= 10:
+            self.m.arduino.close()
 
 '''
     def readArduino2(self):

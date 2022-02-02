@@ -49,7 +49,7 @@ class View(QMainWindow):
         self.b_abort.setEnabled(False)
         self.b_init.clicked.connect(c.init)
         self.app = app
-        # self.check_serial_event()
+        c.check_serial_event()
     '''
     def runLongTask(self, c: Controller, m):
         # Step 2: Create a QThread object
@@ -80,36 +80,7 @@ class View(QMainWindow):
     def updateConsole(self, text):
         self.console.append(str(text))
     '''
-    def check_serial_event(self):
-        self.timeout = 0
-
-        self.timeout += 1
-        # print (self.timeout)
-        serial_thread = threading.Timer(1, self.check_serial_event)
-        if ser.is_open == True:
-            serial_thread.start()
-            if ser.in_waiting:
-                eol = b'\n'
-                leneol = len(eol)
-                line = bytearray()
-                while True:
-                    c = ser.read(1)
-                    if c:
-                        line += c
-                        if line[-leneol:] == eol:
-                            break
-                    else:
-                        break
-                    # print (line)
-                    # print (type(line))
-                line = line.rstrip()
-                distance = line.decode("utf-8")
-                self.console.append(distance + '\n')
-                # print (distance)
-                self.timeout = 0
-
-        if self.timeout >= 10:
-            ser.close()
+    
     '''
     def getTimer(self):
         """
