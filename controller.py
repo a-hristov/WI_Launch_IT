@@ -65,7 +65,7 @@ class Controller():
 
     def readArduino(self):
         while True:
-            time.sleep(1)
+            time.sleep(0.05)
             print('test')
             self.v.updateConsole(self.m.readFromArduino())
 
@@ -74,7 +74,7 @@ class Controller():
 
         self.timeout += 1
         # print (self.timeout)
-        serial_thread = threading.Timer(1, self.check_serial_event)
+        serial_thread = threading.Timer(0.05, self.check_serial_event)
         if self.m.arduino.is_open == True:
             serial_thread.start()
             if self.m.arduino.in_waiting:
