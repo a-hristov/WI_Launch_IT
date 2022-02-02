@@ -36,7 +36,7 @@ class Model:
         Send a 'Launch' String to the Serial Port after a certain amount of time
         """
         try:
-            self.writeToArduino('initiate countdown' + (
+            self.writeToArduino('initiate countdown ' + (
                     datetime.datetime.now() + datetime.timedelta(seconds=constant.LAUNCH_TIME)).strftime(
                 "%H:%M:%S"))
         except AttributeError as e:
