@@ -89,7 +89,7 @@
        </widget>
       </item>
       <item row="0" column="0" rowspan="2">
-       <widget class="QLabel" name="label">
+       <widget class="QLabel" name="state">
         <property name="text">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Rocket Status / Launchpad Status&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>

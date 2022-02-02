@@ -9,7 +9,7 @@ from pip._vendor.msgpack.fallback import xrange
 from controller import Controller
 
 '''
-ser = serial.Serial('COM3', baudrate=115200, timeout=10,
+ser = serial.Serial('COM3', baudrate=115200, timeout=10, 
                     parity=serial.PARITY_NONE,
                     stopbits=serial.STOPBITS_ONE,
                     bytesize=serial.EIGHTBITS
