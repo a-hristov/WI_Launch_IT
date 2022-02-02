@@ -1,37 +1,15 @@
 import threading
 import time
+from random import randint
 
 import serial
-from PyQt6 import uic
+from PyQt6 import uic, QtCore
 from PyQt6.QtCore import QThread, QObject, pyqtSignal
 from PyQt6.QtWidgets import QMainWindow, QApplication
 from pip._vendor.msgpack.fallback import xrange
 from controller import Controller
-
-'''
-ser = serial.Serial('COM3', baudrate=115200, timeout=10, 
-                    parity=serial.PARITY_NONE,
-                    stopbits=serial.STOPBITS_ONE,
-                    bytesize=serial.EIGHTBITS
-                    )
-
-
-
-
-class Worker(QObject):
-    finished = pyqtSignal()
-    progress = pyqtSignal(int)
-
-
-    def run(self, v):
-        while True:
-            time.sleep(1)
-            v.updateConsole(m.readFromArduino())
-        for i in range(5):
-            time.sleep(1)
-            self.progress.emit(i + 1)
-        self.finished.emit()
-'''
+from pyqtgraph import PlotWidget, plot
+import pyqtgraph as pg
 
 
 class View(QMainWindow):
@@ -50,39 +28,35 @@ class View(QMainWindow):
         self.b_abort.setEnabled(False)
         self.b_init.clicked.connect(c.init)
         self.app = app
+        self.plotSetup()
         c.check_serial_event()
-    '''
-    def runLongTask(self, c: Controller, m):
-        # Step 2: Create a QThread object
-        self.thread = QThread()
-        # Step 3: Create a worker object
-        self.worker = Worker()
-        # Step 4: Move worker to the thread
-        self.worker.moveToThread(self.thread)
-        # Step 5: Connect signals and slots
-        self.thread.started.connect(self.worker.run(self, m))
-        self.worker.finished.connect(self.thread.quit)
-        self.worker.finished.connect(self.worker.deleteLater)
-        self.thread.finished.connect(self.thread.deleteLater)
-        # self.worker.progress.connect(self.reportProgress)
-        # Step 6: Start the thread
-        self.thread.start()
-
-        # Final resets
-        # self.longRunningBtn.setEnabled(False)
-        # self.thread.finished.connect(
-        #    lambda: self.longRunningBtn.setEnabled(True)
-        # )
-        # self.thread.finished.connect(
-        #    lambda: self.stepLabel.setText("Long-Running Step: 0")
-        # )
-    '''
 
     def updateConsole(self, text):
         self.console.append(str(text))
-    '''
-    
-    '''
+
+    def plotSetup(self):
+        self.x = list(range(100))  # 100 time points
+        self.y = [randint(0, 100) for _ in range(100)]  # 100 data points
+        pen = pg.mkPen(color=(255, 0, 0))
+        self.data_line1 = self.graph1.plot(self.x, self.y, pen=pen)
+        self.data_line2 = self.graph2.plot(self.x, self.y, pen=pen)
+
+        self.timer = QtCore.QTimer()
+        self.timer.setInterval(50)
+        self.timer.timeout.connect(self.update_plot_data)
+        self.timer.start()
+
+    def update_plot_data(self):
+        self.x = self.x[1:]  # Remove the first y element.
+        self.x.append(self.x[-1] + 1)  # Add a new value 1 higher than the last.
+
+        self.y = self.y[1:]  # Remove the first
+        self.y.append(randint(0, 100))  # Add a new random value.
+
+        self.data_line1.setData(self.x, self.y)  # Update the data.
+        self.data_line2.setData(self.x, self.y)  # Update the data.
+
+
     def getTimer(self):
         """
         Return the User specified Launchtimer
@@ -108,11 +82,6 @@ class View(QMainWindow):
         self.b_ejection.setEnabled(True)
         self.b_abort.setEnabled(True)
 
-
-"""
-    def setConsole(self,x:str):
-        self.l_console.text(x)
-    """
 
 if __name__ == '__main__':
     import sys

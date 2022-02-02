@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1103</width>
-    <height>675</height>
+    <width>1169</width>
+    <height>534</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,13 +23,20 @@
       <property name="spacing">
        <number>12</number>
       </property>
-      <item row="7" column="4" rowspan="5" colspan="2">
-       <widget class="QGraphicsView" name="w_plot2"/>
+      <item row="9" column="0">
+       <widget class="QPushButton" name="b_launch">
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);</string>
+        </property>
+        <property name="text">
+         <string>Initiate Takeoff in 2min</string>
+        </property>
+       </widget>
       </item>
-      <item row="2" column="0" rowspan="5">
+      <item row="2" column="0" rowspan="6">
        <widget class="QLCDNumber" name="lcdNumber"/>
       </item>
-      <item row="10" column="0">
+      <item row="11" column="0">
        <widget class="QPushButton" name="b_ejection">
         <property name="enabled">
          <bool>false</bool>
@@ -42,33 +49,20 @@
         </property>
        </widget>
       </item>
-      <item row="8" column="0">
-       <widget class="QPushButton" name="b_launch">
-        <property name="styleSheet">
-         <string notr="true">color: rgb(255, 255, 255);</string>
-        </property>
-        <property name="text">
-         <string>Initiate Takeoff in 2min</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1" rowspan="12">
+      <item row="0" column="1" rowspan="13">
        <widget class="QGraphicsView" name="graphicsView_2"/>
       </item>
-      <item row="6" column="4" colspan="2">
-       <widget class="QGraphicsView" name="w_plot1">
-        <property name="frameShadow">
-         <enum>QFrame::Plain</enum>
-        </property>
-        <property name="midLineWidth">
-         <number>1</number>
+      <item row="7" column="2" rowspan="6" colspan="2">
+       <widget class="QGraphicsView" name="graphicsView_3"/>
+      </item>
+      <item row="0" column="0" rowspan="2">
+       <widget class="QLabel" name="state">
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Rocket Status / Launchpad Status&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
       </item>
-      <item row="6" column="2" rowspan="6" colspan="2">
-       <widget class="QGraphicsView" name="graphicsView_3"/>
-      </item>
-      <item row="11" column="0">
+      <item row="12" column="0">
        <widget class="QPushButton" name="exit">
         <property name="styleSheet">
          <string notr="true">color: rgb(255, 255, 255);</string>
@@ -78,7 +72,7 @@
         </property>
        </widget>
       </item>
-      <item row="7" column="0">
+      <item row="8" column="0">
        <widget class="QPushButton" name="b_init">
         <property name="styleSheet">
          <string notr="true">color: rgb(255, 255, 255);</string>
@@ -88,14 +82,7 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="0" rowspan="2">
-       <widget class="QLabel" name="state">
-        <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Rocket Status / Launchpad Status&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
-       </widget>
-      </item>
-      <item row="9" column="0">
+      <item row="10" column="0">
        <widget class="QPushButton" name="b_abort">
         <property name="styleSheet">
          <string notr="true">
@@ -106,7 +93,21 @@ color: rgb(255, 255, 255);</string>
         </property>
        </widget>
       </item>
-      <item row="3" column="2" rowspan="3" colspan="2">
+      <item row="0" column="4" rowspan="7" colspan="2">
+       <widget class="QTextEdit" name="console">
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(0, 0, 0);</string>
+        </property>
+       </widget>
+      </item>
+      <item row="10" column="4" rowspan="3" colspan="2">
+       <widget class="PlotWidget" name="graph2" native="true"/>
+      </item>
+      <item row="7" column="4" rowspan="3" colspan="2">
+       <widget class="PlotWidget" name="graph1" native="true"/>
+      </item>
+      <item row="4" column="2" rowspan="3" colspan="2">
        <widget class="QLabel" name="label_5">
         <property name="font">
          <font>
@@ -128,7 +129,7 @@ background-color: rgb(255, 0, 0);</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="2" rowspan="3" colspan="2">
+      <item row="1" column="2" rowspan="2" colspan="2">
        <widget class="QLabel" name="hold">
         <property name="maximumSize">
          <size>
@@ -154,8 +155,25 @@ background-color: rgb(255, 0, 0);</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="4" rowspan="6" colspan="2">
-       <widget class="QTextEdit" name="console"/>
+      <item row="0" column="2" colspan="2">
+       <widget class="QLabel" name="label">
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);</string>
+        </property>
+        <property name="text">
+         <string>Rocket State:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="2" colspan="2">
+       <widget class="QLabel" name="label_2">
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);</string>
+        </property>
+        <property name="text">
+         <string>Launchpad State:</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
@@ -166,13 +184,21 @@ background-color: rgb(255, 0, 0);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1103</width>
+     <width>1169</width>
      <height>26</height>
     </rect>
    </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>PlotWidget</class>
+   <extends>QWidget</extends>
+   <header>pyqtgraph</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>

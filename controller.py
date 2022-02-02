@@ -100,13 +100,6 @@ class Controller():
         if self.timeout >= 10:
             self.m.arduino.close()
 
-'''
-    def readArduino2(self):
-        while True:
-            time.sleep(1)
-            
-            self.v.updateConsole(self.m.readFromArduino())
-'''
 
 if __name__ == '__main__':
     """
