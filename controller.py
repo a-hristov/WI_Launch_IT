@@ -1,4 +1,5 @@
 import sys
+import threading
 import time
 from threading import Thread
 
@@ -18,10 +19,8 @@ class Controller():
         Setup references to the Model and View
         """
 
-        self.thread1 = QThread()
         self.m = model.Model()
         self.v = view.View(self, app)
-        self.v.runLongTask(self)
 
     def ejection(self):
         """
@@ -29,21 +28,19 @@ class Controller():
         """
         self.m.chuteEjection()
 
-    def run(self):
-        self.v.updateConsole(self.m.readFromArduino())
-        for i in range(5):
-            time.sleep(1)
-            self.progress.emit(i + 1)
-        self.finished.emit()
-
     def init(self):
         """
         Method to execute the models initMode method
         :return:
         """
-        self.m.initMode()
-        print(self.m.readFromArduino())
-        self.v.enableButtons()
+        t1 = Thread(target=self.m.initMode())
+        t1.start()
+        t1.join()
+
+        t2 = Thread(target=self.v.enableButtons())
+        t2.start()
+        t2.join()
+        # self.v.runLongTask(self, self.m)
 
     def launch(self):
         """
@@ -54,8 +51,9 @@ class Controller():
         # self.m.launchWithTimer(int(self.v.getTimer()))
         # self.v.setLcdNumber(int(self.v.getTimer()))
         # t1 = Thread(target=self.m.launchWithTimer(int(self.v.getTimer())))
-        t2 = Thread(target=self.v.setLcdNumber(constant.LAUNCH_TIME - 1))
+        t2 = Thread(target=self.v.setLcdNumber(constant.LAUNCH_TIME - 1), args=[])
         t2.start()
+        t2.join()
         # t1.start()
 
     def abort(self):
@@ -65,12 +63,14 @@ class Controller():
         """
         self.m.abort()
 
+    def readArduino(self):
+        while True:
+            time.sleep(1)
+            print('test')
+            self.v.updateConsole(self.m.readFromArduino())
+
 
 '''
-    def readArduino(self):
-        self.thread1.started.connect(self.readArduino2)
-        self.thread1.start()
-
     def readArduino2(self):
         while True:
             time.sleep(1)

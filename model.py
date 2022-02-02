@@ -1,3 +1,4 @@
+import threading
 import time
 import constant
 import serial
@@ -10,15 +11,9 @@ class Model:
         """
         arduino: the serial port on which the arduino is connected to the computer
         """
-        try:
-            self.arduino = serial.Serial(port='COM6', baudrate=9600, timeout=.1)
-        except serial.SerialException as e:
-            print('Could not connect with the Controller, make sure that you have selected the right port or that the device is plugged in.')
-            return None
-        except TypeError as e:
-            self.port.close()
-            print('error2')
-            return None
+
+        self.arduino = serial.Serial('COM3', baudrate=115200, timeout=10)
+
         # Comment this line if you want to test GUI
 
     def writeToArduino(self, x: str):
@@ -34,14 +29,16 @@ class Model:
         returns the received data from the arduino
         :return: the received data
         """
-        return self.arduino.readline(eol=b'\r\n')
+        return self.arduino.readline()
 
     def launchWithTimer(self):
         """
         Send a 'Launch' String to the Serial Port after a certain amount of time
         """
         try:
-            self.writeToArduino('initiate countdown' + (datetime.datetime.now() + datetime.timedelta(seconds=constant.LAUNCH_TIME)).strftime("%H:%M:%S"))
+            self.writeToArduino('initiate countdown' + (
+                    datetime.datetime.now() + datetime.timedelta(seconds=constant.LAUNCH_TIME)).strftime(
+                "%H:%M:%S"))
         except AttributeError as e:
             print('The Controller is not connected to the Computer')
             return None
@@ -59,6 +56,7 @@ class Model:
         :return:
         """
         self.writeToArduino('init')
+        print('hi')
 
     def abort(self):
         """
@@ -76,9 +74,8 @@ if __name__ == '__main__':
         print(m.readFromArduino())'''
 
     # print('initiate countdown', (datetime.datetime.now() + datetime.timedelta(seconds=constant.LAUNCH_TIME)).strftime("%H:%M:%S"))
-    #Model().launchWithTimer()
+    # Model().launchWithTimer()
     while True:
-        time.sleep(0.5)
+        time.sleep(1)
         print(m.readFromArduino())
-        m.writeToArduino('init')
-
+        # m.writeToArduino('init')

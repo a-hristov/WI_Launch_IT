@@ -1,23 +1,36 @@
+import threading
 import time
 
+import serial
 from PyQt6 import uic
 from PyQt6.QtCore import QThread, QObject, pyqtSignal
 from PyQt6.QtWidgets import QMainWindow, QApplication
 from pip._vendor.msgpack.fallback import xrange
-
 from controller import Controller
+
+'''
+ser = serial.Serial('COM3', baudrate=115200, timeout=10,
+                    parity=serial.PARITY_NONE,
+                    stopbits=serial.STOPBITS_ONE,
+                    bytesize=serial.EIGHTBITS
+                    )
+
+
 
 
 class Worker(QObject):
     finished = pyqtSignal()
     progress = pyqtSignal(int)
 
-    def run(self):
-        """Long-running task."""
+    def run(self, v):
+        while True:
+            time.sleep(1)
+            v.updateConsole(m.readFromArduino())
         for i in range(5):
             time.sleep(1)
             self.progress.emit(i + 1)
         self.finished.emit()
+'''
 
 
 class View(QMainWindow):
@@ -28,7 +41,6 @@ class View(QMainWindow):
         """
         super().__init__()
         uic.loadUi("diplomprojekt.ui", self)
-
         self.b_launch.clicked.connect(c.launch)
         self.b_launch.setEnabled(False)
         self.b_ejection.clicked.connect(c.ejection)
@@ -37,8 +49,9 @@ class View(QMainWindow):
         self.b_abort.setEnabled(False)
         self.b_init.clicked.connect(c.init)
         self.app = app
-
-    def runLongTask(self, c: Controller):
+        # self.check_serial_event()
+    '''
+    def runLongTask(self, c: Controller, m):
         # Step 2: Create a QThread object
         self.thread = QThread()
         # Step 3: Create a worker object
@@ -46,26 +59,58 @@ class View(QMainWindow):
         # Step 4: Move worker to the thread
         self.worker.moveToThread(self.thread)
         # Step 5: Connect signals and slots
-        self.thread.started.connect(self.worker.run)
+        self.thread.started.connect(self.worker.run(self, m))
         self.worker.finished.connect(self.thread.quit)
         self.worker.finished.connect(self.worker.deleteLater)
         self.thread.finished.connect(self.thread.deleteLater)
-        #self.worker.progress.connect(self.reportProgress)
+        # self.worker.progress.connect(self.reportProgress)
         # Step 6: Start the thread
         self.thread.start()
 
         # Final resets
-        #self.longRunningBtn.setEnabled(False)
-        #self.thread.finished.connect(
+        # self.longRunningBtn.setEnabled(False)
+        # self.thread.finished.connect(
         #    lambda: self.longRunningBtn.setEnabled(True)
-        #)
-        #self.thread.finished.connect(
+        # )
+        # self.thread.finished.connect(
         #    lambda: self.stepLabel.setText("Long-Running Step: 0")
-        #)
+        # )
+    '''
 
     def updateConsole(self, text):
         self.console.append(str(text))
+    '''
+    def check_serial_event(self):
+        self.timeout = 0
 
+        self.timeout += 1
+        # print (self.timeout)
+        serial_thread = threading.Timer(1, self.check_serial_event)
+        if ser.is_open == True:
+            serial_thread.start()
+            if ser.in_waiting:
+                eol = b'\n'
+                leneol = len(eol)
+                line = bytearray()
+                while True:
+                    c = ser.read(1)
+                    if c:
+                        line += c
+                        if line[-leneol:] == eol:
+                            break
+                    else:
+                        break
+                    # print (line)
+                    # print (type(line))
+                line = line.rstrip()
+                distance = line.decode("utf-8")
+                self.console.append(distance + '\n')
+                # print (distance)
+                self.timeout = 0
+
+        if self.timeout >= 10:
+            ser.close()
+    '''
     def getTimer(self):
         """
         Return the User specified Launchtimer

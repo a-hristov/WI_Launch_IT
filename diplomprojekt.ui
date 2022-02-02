@@ -155,7 +155,7 @@ background-color: rgb(255, 0, 0);</string>
        </widget>
       </item>
       <item row="0" column="4" rowspan="6" colspan="2">
-       <widget class="QPlainTextEdit" name="console"/>
+       <widget class="QTextEdit" name="console"/>
       </item>
      </layout>
     </item>
