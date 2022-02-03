@@ -97,10 +97,10 @@ class Controller():
                     self.v.setRocketState('1')
                 if distance == 'message from rocket 0: GPS gets signal':
                     self.v.setRocketState('2')
-                if distance.startswith('***'):
+                if distance.startswith('message from rocket 0: ***'):
                     x = distance.split(',')
                     self.v.setRocketState(x[-2])
-                if distance.startswith('\'\'\''):
+                if distance.startswith('message from lPad 1: \'\'\''):
                     x = distance.split(',')
                     self.v.setLaunchpadState(x[-2])
                 if distance == 'message from lPad 1: connection established':
