@@ -56,7 +56,6 @@ class View(QMainWindow):
         self.data_line1.setData(self.x, self.y)  # Update the data.
         self.data_line2.setData(self.x, self.y)  # Update the data.
 
-
     def getTimer(self):
         """
         Return the User specified Launchtimer
@@ -81,6 +80,58 @@ class View(QMainWindow):
         self.b_launch.setEnabled(True)
         self.b_ejection.setEnabled(True)
         self.b_abort.setEnabled(True)
+
+    def setRocketState(self, txt):
+        if txt == '0':
+            self.rocketState.setText('Radio Setup')
+            self.rocketState.setStyleSheet('background-color: rgb(255, 255, 255); font: 87 18pt "Arial Black";')
+        if txt == '1':
+            self.rocketState.setText('GPS Setup')
+            self.rocketState.setStyleSheet('background-color: rgb(255, 128, 0); font: 87 18pt "Arial Black";')
+        if txt == '2':
+            self.rocketState.setText('waiting for \ncountdown')
+            self.rocketState.setStyleSheet('background-color: rgb(0, 255, 0); font: 87 18pt "Arial Black";')
+        if txt == '3':
+            self.rocketState.setText('ongoing \ncountdown')  # changed from 'while countdown' because of preference
+            self.rocketState.setStyleSheet('background-color: rgb(255, 255, 255); font: 87 18pt "Arial Black";')
+        if txt == '4':
+            self.rocketState.setText('Detect Liftoff')
+            self.rocketState.setStyleSheet('background-color: rgb(87, 109, 255); font: 87 18pt "Arial Black";')
+        if txt == '5':
+            self.rocketState.setText('Ascend')
+            self.rocketState.setStyleSheet('background-color: rgb(233, 188, 255); font: 87 18pt "Arial Black";')
+        if txt == '6':
+            self.rocketState.setText('Descend')
+            self.rocketState.setStyleSheet('background-color: rgb(0, 255, 255); font: 87 18pt "Arial Black";')
+        if txt == '7':
+            self.rocketState.setText('Awaiting \nRecovery')
+            self.rocketState.setStyleSheet('background-color: rgb(255, 255, 255); font: 87 18pt "Arial Black";')
+        if txt == '8':
+            self.rocketState.setText('Abort')
+            self.rocketState.setStyleSheet('background-color: rgb(255, 255, 255); font: 87 18pt "Arial Black";')
+        if txt == '9':
+            self.rocketState.setText('In Flight abort')
+            self.rocketState.setStyleSheet('background-color: rgb(128, 128, 128); font: 87 18pt "Arial Black";')
+
+    def setLaunchpadState(self, txt):
+        if txt == '0':
+            self.launchpadState.setText('Radio Setup')
+            self.launchpadState.setStyleSheet('background-color: rgb(255, 255, 255); font: 87 18pt "Arial Black";')
+        if txt == '1':
+            self.launchpadState.setText('GPS Setup')
+            self.launchpadState.setStyleSheet('background-color: rgb(255, 128, 0); font: 87 18pt "Arial Black";')
+        if txt == '2':
+            self.launchpadState.setText('waiting for \ncountdown')
+            self.launchpadState.setStyleSheet('background-color: rgb(0, 255, 0); font: 87 18pt "Arial Black";')
+        if txt == '3':
+            self.launchpadState.setText('ongoing \ncountdown')  # changed from 'while countdown' because of preference
+            self.launchpadState.setStyleSheet('background-color: rgb(255, 255, 255); font: 87 18pt "Arial Black";')
+        if txt == '4':
+            self.launchpadState.setText('Ignition')
+            self.launchpadState.setStyleSheet('background-color: rgb(87, 109, 255); font: 87 18pt "Arial Black";')
+        if txt == '8':
+            self.launchpadState.setText('Abort')
+            self.launchpadState.setStyleSheet('background-color: rgb(255, 255, 255); font: 87 18pt "Arial Black";')
 
 
 if __name__ == '__main__':

@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1169</width>
-    <height>534</height>
+    <width>1443</width>
+    <height>779</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>WI_Launch_IT</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(44, 46, 48);</string>
@@ -23,7 +23,10 @@
       <property name="spacing">
        <number>12</number>
       </property>
-      <item row="9" column="0">
+      <item row="2" column="0" rowspan="7">
+       <widget class="QLCDNumber" name="lcdNumber"/>
+      </item>
+      <item row="10" column="0">
        <widget class="QPushButton" name="b_launch">
         <property name="styleSheet">
          <string notr="true">color: rgb(255, 255, 255);</string>
@@ -33,10 +36,10 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="0" rowspan="6">
-       <widget class="QLCDNumber" name="lcdNumber"/>
+      <item row="0" column="1" rowspan="14">
+       <widget class="QGraphicsView" name="graphicsView_2"/>
       </item>
-      <item row="11" column="0">
+      <item row="12" column="0">
        <widget class="QPushButton" name="b_ejection">
         <property name="enabled">
          <bool>false</bool>
@@ -49,30 +52,10 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="1" rowspan="13">
-       <widget class="QGraphicsView" name="graphicsView_2"/>
-      </item>
-      <item row="7" column="2" rowspan="6" colspan="2">
+      <item row="8" column="2" rowspan="6" colspan="2">
        <widget class="QGraphicsView" name="graphicsView_3"/>
       </item>
-      <item row="0" column="0" rowspan="2">
-       <widget class="QLabel" name="state">
-        <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Rocket Status / Launchpad Status&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
-       </widget>
-      </item>
-      <item row="12" column="0">
-       <widget class="QPushButton" name="exit">
-        <property name="styleSheet">
-         <string notr="true">color: rgb(255, 255, 255);</string>
-        </property>
-        <property name="text">
-         <string>Close</string>
-        </property>
-       </widget>
-      </item>
-      <item row="8" column="0">
+      <item row="9" column="0">
        <widget class="QPushButton" name="b_init">
         <property name="styleSheet">
          <string notr="true">color: rgb(255, 255, 255);</string>
@@ -82,7 +65,7 @@
         </property>
        </widget>
       </item>
-      <item row="10" column="0">
+      <item row="11" column="0">
        <widget class="QPushButton" name="b_abort">
         <property name="styleSheet">
          <string notr="true">
@@ -93,65 +76,20 @@ color: rgb(255, 255, 255);</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="4" rowspan="7" colspan="2">
-       <widget class="QTextEdit" name="console">
-        <property name="styleSheet">
-         <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(0, 0, 0);</string>
+      <item row="0" column="0" rowspan="2">
+       <widget class="QLabel" name="state">
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:20pt; color:#ff4700;&quot;&gt;WI&lt;/span&gt;&lt;span style=&quot; font-size:20pt; color:#ffffff;&quot;&gt; Launch &lt;/span&gt;&lt;span style=&quot; font-size:20pt; color:#ff4700;&quot;&gt;IT&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; color:#e3e3e3;&quot;&gt;Telemetry Software &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
       </item>
-      <item row="10" column="4" rowspan="3" colspan="2">
-       <widget class="PlotWidget" name="graph2" native="true"/>
-      </item>
-      <item row="7" column="4" rowspan="3" colspan="2">
-       <widget class="PlotWidget" name="graph1" native="true"/>
-      </item>
-      <item row="4" column="2" rowspan="3" colspan="2">
-       <widget class="QLabel" name="label_5">
-        <property name="font">
-         <font>
-          <family>Kozuka Gothic Pr6N H</family>
-          <pointsize>18</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
+      <item row="13" column="0">
+       <widget class="QPushButton" name="exit">
         <property name="styleSheet">
-         <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(255, 0, 0);</string>
+         <string notr="true">color: rgb(255, 255, 255);</string>
         </property>
         <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ignition&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="2" rowspan="2" colspan="2">
-       <widget class="QLabel" name="hold">
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>87</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <family>Kozuka Gothic Pro H</family>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(0, 170, 0);</string>
-        </property>
-        <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;HOLD&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
+         <string>Close</string>
         </property>
        </widget>
       </item>
@@ -165,13 +103,74 @@ background-color: rgb(255, 0, 0);</string>
         </property>
        </widget>
       </item>
-      <item row="3" column="2" colspan="2">
+      <item row="4" column="2" colspan="2">
        <widget class="QLabel" name="label_2">
         <property name="styleSheet">
          <string notr="true">color: rgb(255, 255, 255);</string>
         </property>
         <property name="text">
          <string>Launchpad State:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2" rowspan="3" colspan="2">
+       <widget class="QLabel" name="rocketState">
+        <property name="font">
+         <font>
+          <family>Arial Black</family>
+          <pointsize>15</pointsize>
+          <weight>10</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(255, 255, 255);
+font: 87 15pt &quot;Arial Black&quot;;</string>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Radio Setup&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="4" rowspan="7" colspan="2">
+       <widget class="QTextEdit" name="console">
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(0, 0, 0);</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="4" rowspan="3" colspan="2">
+       <widget class="PlotWidget" name="graph1" native="true"/>
+      </item>
+      <item row="10" column="4" rowspan="4" colspan="2">
+       <widget class="PlotWidget" name="graph2" native="true"/>
+      </item>
+      <item row="5" column="2" rowspan="3" colspan="2">
+       <widget class="QLabel" name="launchpadState">
+        <property name="font">
+         <font>
+          <family>Arial Black</family>
+          <pointsize>15</pointsize>
+          <weight>10</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);
+font: 87 15pt &quot;Arial Black&quot;;</string>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Radio Setup&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
@@ -184,7 +183,7 @@ background-color: rgb(255, 0, 0);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1169</width>
+     <width>1443</width>
      <height>26</height>
     </rect>
    </property>
@@ -199,7 +198,9 @@ background-color: rgb(255, 0, 0);</string>
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../../../../TGM/5CHIT/Diplomprojekt/logo_klein_quality.png"/>
+ </resources>
  <connections>
   <connection>
    <sender>exit</sender>

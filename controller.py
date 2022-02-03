@@ -75,7 +75,7 @@ class Controller():
         self.timeout += 1
         # print (self.timeout)
         serial_thread = threading.Timer(0.05, self.check_serial_event)
-        if self.m.arduino.is_open == True:
+        if self.m.arduino.is_open:
             serial_thread.start()
             if self.m.arduino.in_waiting:
                 eol = b'\n'
@@ -93,6 +93,20 @@ class Controller():
                     # print (type(line))
                 line = line.rstrip()
                 distance = line.decode("utf-8")
+                if distance == 'message from rocket 0: connection established':
+                    self.v.setRocketState('1')
+                if distance == 'message from rocket 0: GPS gets signal':
+                    self.v.setRocketState('2')
+                if distance.startswith('***'):
+                    x = distance.split(',')
+                    self.v.setRocketState(x[-2])
+                if distance.startswith('\'\'\''):
+                    x = distance.split(',')
+                    self.v.setLaunchpadState(x[-2])
+                if distance == 'message from lPad 1: connection established':
+                    self.v.setLaunchpadState('1')
+                if distance == 'message from lPad 1: GPS gets signal':
+                    self.v.setLaunchpadState('2')
                 self.v.console.append(distance + '\n')
                 # print (distance)
                 self.timeout = 0

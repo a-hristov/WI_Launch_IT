@@ -65,6 +65,23 @@ class Model:
         """
         self.writeToArduino('abort')
 
+    def forwardingArduinoMessage(self):
+        """
+        Every message sent by the controller which is meant to reach this program begins with one of three sequences in order to define which part of the data it represents.
+        Sequence 1: +++
+        Sequence 2: ***
+        Sequence 3: ~~~
+        :return:
+        """
+        if self.readFromArduino().startswith(b'+++'):
+            print('The date begins with +++')
+        if self.readFromArduino().startswith(b'***'):
+            print('The date begins with ***')
+        if self.readFromArduino().startswith(b'~~~'):
+            print('The date begins with ~~~')
+
+
+
 
 if __name__ == '__main__':
 
@@ -73,10 +90,9 @@ if __name__ == '__main__':
     while True:
         print(m.readFromArduino())'''
 
-
     # print('initiate countdown', (datetime.datetime.now() + datetime.timedelta(seconds=constant.LAUNCH_TIME)).strftime("%H:%M:%S"))
     # Model().launchWithTimer()
     while True:
         time.sleep(1)
-        print(m.readFromArduino())
+        print(m.forwardingArduinoMessage())
         # m.writeToArduino('init')
