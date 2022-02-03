@@ -108,7 +108,7 @@ class View(QMainWindow):
             self.rocketState.setStyleSheet('background-color: rgb(255, 255, 255); font: 87 18pt "Arial Black";')
         if txt == '8':
             self.rocketState.setText('Abort')
-            self.rocketState.setStyleSheet('background-color: rgb(255, 255, 255); font: 87 18pt "Arial Black";')
+            self.rocketState.setStyleSheet('background-color: rgb(255, 0, 0); font: 87 18pt "Arial Black";')
         if txt == '9':
             self.rocketState.setText('In Flight abort')
             self.rocketState.setStyleSheet('background-color: rgb(128, 128, 128); font: 87 18pt "Arial Black";')
@@ -131,7 +131,7 @@ class View(QMainWindow):
             self.launchpadState.setStyleSheet('background-color: rgb(87, 109, 255); font: 87 18pt "Arial Black";')
         if txt == '8':
             self.launchpadState.setText('Abort')
-            self.launchpadState.setStyleSheet('background-color: rgb(255, 255, 255); font: 87 18pt "Arial Black";')
+            self.launchpadState.setStyleSheet('background-color: rgb(255, 0, 0); font: 87 18pt "Arial Black";')
 
 
 if __name__ == '__main__':
