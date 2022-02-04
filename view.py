@@ -196,15 +196,13 @@ class View(QMainWindow):
         Set the LCD Number as a countdown with the timer
         :param x: the timer
         """
-        for i in xrange(int(x), 0, -1):
-            time.sleep(1)
+        for i in xrange(int(x), -1, -1):
             print(i)
-            self.app.processEvents()
+
             self.lcdNumber.display(i)
             start = time.time()
             while time.time() - start < 1:
                 self.app.processEvents()
-                self.lcdNumber.display(i)
                 time.sleep(0.02)
 
         print('boom')

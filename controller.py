@@ -55,6 +55,7 @@ class Controller():
         :return:
         """
         self.m.abort()
+        self.v.setLcdNumber(0)
 
     def readArduino(self):
         while True:
@@ -96,7 +97,7 @@ class Controller():
                     print(float(x[-1]))
                     self.v.update_accelZ_plot_data(float(substring), float(x[-1]), -99991234.337, -99991234.337, -99991234.337, -99991234.337)
 
-                    self.v.setVerticalSlider(int(x[-2]))
+                    self.v.setVerticalSlider(float(x[-2]))
 
                 if distance.startswith('message from rocket 0: ~~~'):
                     start = distance.find("message from rocket 0: ~~~ ") + len("message from rocket 0: ~~~ ")
