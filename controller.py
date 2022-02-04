@@ -45,9 +45,8 @@ class Controller():
         # self.m.launchWithTimer(int(self.v.getTimer()))
         # self.v.setLcdNumber(int(self.v.getTimer()))
         # t1 = Thread(target=self.m.launchWithTimer(int(self.v.getTimer())))
-        t2 = Thread(target=self.v.setLcdNumber(constant.LAUNCH_TIME - 1), args=[])
-        t2.start()
-        t2.join()
+        self.v.setLcdNumber(constant.LAUNCH_TIME - 1)
+
         # t1.start()
 
     def abort(self):

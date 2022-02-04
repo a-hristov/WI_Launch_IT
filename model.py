@@ -64,6 +64,7 @@ class Model:
         :return:
         """
         self.writeToArduino('abort')
+        print('abort')
 
     def forwardingArduinoMessage(self):
         """

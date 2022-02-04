@@ -31,7 +31,7 @@ class View(QMainWindow):
 
         c.check_serial_event()
         self.plotSetup(0.0)
-        #self.plotSetup2()
+        # self.plotSetup2()
 
     def updateConsole(self, text):
         self.console.append(str(text))
@@ -54,11 +54,9 @@ class View(QMainWindow):
         self.servoYy = self.y
         self.rolly = self.y
 
-
-
         pen = pg.mkPen(color=(255, 0, 0))
-        self.data_line1 = self.graph1.plot(self.accelZx, self.accelZy, pen=pen) # accelZ
-        self.data_line2 = self.graph2.plot(self.xAxisx, self.xAxisy, pen=pen) # roll
+        self.data_line1 = self.graph1.plot(self.accelZx, self.accelZy, pen=pen)  # accelZ
+        self.data_line2 = self.graph2.plot(self.xAxisx, self.xAxisy, pen=pen)  # roll
         self.data_line3 = self.xAxisGraph.plot(self.yAxisx, self.yAxisy, pen=pen)
         self.data_line4 = self.yAxisGraph.plot(self.servoXx, self.servoXy, pen=pen)
         self.data_line5 = self.servoX.plot(self.servoYx, self.servoYy, pen=pen)
@@ -72,14 +70,9 @@ class View(QMainWindow):
         self.timer = QtCore.QTimer()
         self.timer.setInterval(50)
         self.timer.timeout.connect(self.update_accelZ_plot_data)
-        self.timer.timeout.connect(self.update_xAxisGraph_plot_data)
-        self.timer.timeout.connect(self.update_yAxisGraph_plot_data)
-        self.timer.timeout.connect(self.update_servoX_plot_data)
-        self.timer.timeout.connect(self.update_servoY_plot_data)
-        self.timer.timeout.connect(self.update_roll_plot_data)
-
 
         self.timer.start()
+
     '''
     def plotSetup2(self):
         self.x2 = list(range(100))  # 100 time points
@@ -208,6 +201,11 @@ class View(QMainWindow):
             print(i)
             self.app.processEvents()
             self.lcdNumber.display(i)
+            start = time.time()
+            while time.time() - start < 1:
+                self.app.processEvents()
+                self.lcdNumber.display(i)
+                time.sleep(0.02)
 
         print('boom')
 
