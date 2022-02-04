@@ -22,6 +22,7 @@ class Controller():
         self.m = model.Model()
         self.v = view.View(self, app)
 
+
     def ejection(self):
         """
         Method to execute the Models chuteEjecton method
@@ -33,14 +34,8 @@ class Controller():
         Method to execute the models initMode method
         :return:
         """
-        t1 = Thread(target=self.m.initMode())
-        t1.start()
-        t1.join()
-
-        t2 = Thread(target=self.v.enableButtons())
-        t2.start()
-        t2.join()
-        # self.v.runLongTask(self, self.m)
+        self.m.initMode()
+        self.v.enableButtons()
 
     def launch(self):
         """
@@ -93,6 +88,17 @@ class Controller():
                     # print (type(line))
                 line = line.rstrip()
                 distance = line.decode("utf-8")
+                if distance.startswith('message from rocket 0: +++'):
+                    try:
+                        start = distance.find("message from rocket 0: +++ ") + len("message from rocket 0: +++ ")
+                        end = distance.find(",")
+                        substring = distance[start:end]
+                        print(substring)
+                        self.v.update_plot_data(float(substring))
+                    except TypeError:
+                        print('oh no, ... anyways')
+                    x = distance.split(',')
+                    self.v.setVerticalSlider(int(x[-2]))
                 if distance == 'message from rocket 0: connection established':
                     self.v.setRocketState('1')
                 if distance == 'message from rocket 0: GPS gets signal':

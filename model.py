@@ -12,7 +12,7 @@ class Model:
         arduino: the serial port on which the arduino is connected to the computer
         """
 
-        self.arduino = serial.Serial('COM4', baudrate=9600, timeout=10)
+        self.arduino = serial.Serial('COM3', baudrate=9600, timeout=10)
 
         # Comment this line if you want to test GUI
 
@@ -81,17 +81,22 @@ class Model:
             print('The date begins with ~~~')
 
 
-
 if __name__ == '__main__':
 
-    m = Model()
+    # m = Model()
     '''
     while True:
         print(m.readFromArduino())'''
 
     # print('initiate countdown', (datetime.datetime.now() + datetime.timedelta(seconds=constant.LAUNCH_TIME)).strftime("%H:%M:%S"))
     # Model().launchWithTimer()
-    while True:
-        time.sleep(1)
-        print(m.forwardingArduinoMessage())
+    # while True:
+        # time.sleep(1)
+        # print(m.forwardingArduinoMessage())
         # m.writeToArduino('init')
+    s = "message from rocket 0: +++ -0.01,-0.18,40.81"
+
+    start = s.find("message from rocket 0: +++ ") + len("message from rocket 0: +++ ")
+    end = s.find(",")
+    substring = s[start:end]
+    print(substring)

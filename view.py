@@ -28,33 +28,38 @@ class View(QMainWindow):
         self.b_abort.setEnabled(False)
         self.b_init.clicked.connect(c.init)
         self.app = app
-        self.plotSetup()
+
         c.check_serial_event()
+        self.plotSetup(0.0)
 
     def updateConsole(self, text):
         self.console.append(str(text))
 
-    def plotSetup(self):
+    def plotSetup(self, data):
         self.x = list(range(100))  # 100 time points
-        self.y = [randint(0, 100) for _ in range(100)]  # 100 data points
+        self.y = [0 for _ in range(100)]  # 100 data points
         pen = pg.mkPen(color=(255, 0, 0))
         self.data_line1 = self.graph1.plot(self.x, self.y, pen=pen)
-        self.data_line2 = self.graph2.plot(self.x, self.y, pen=pen)
-
+        # self.data_line2 = self.graph2.plot(self.x, self.y, pen=pen)
+        self.data_line3 = self.xAxisGraph.plot(self.x, self.y, pen=pen)
+        self.data_line4 = self.yAxisGraph.plot(self.x, self.y, pen=pen)
+        self.data_line5 = self.servoX.plot(self.x, self.y, pen=pen)
+        self.data_line6 = self.servoY.plot(self.x, self.y, pen=pen)
+        self.graph1.setTitle('Acceleration Z')
         self.timer = QtCore.QTimer()
         self.timer.setInterval(50)
         self.timer.timeout.connect(self.update_plot_data)
         self.timer.start()
 
-    def update_plot_data(self):
+    def update_plot_data(self, accelZ):
         self.x = self.x[1:]  # Remove the first y element.
         self.x.append(self.x[-1] + 1)  # Add a new value 1 higher than the last.
 
-        self.y = self.y[1:]  # Remove the first
-        self.y.append(randint(0, 100))  # Add a new random value.
+        self.accelZy = self.y[1:]  # Remove the first
+        self.accelZy.append(accelZ)  # Add a new random value.
 
-        self.data_line1.setData(self.x, self.y)  # Update the data.
-        self.data_line2.setData(self.x, self.y)  # Update the data.
+        self.data_line1.setData(self.x, self.accelZy)  # Update the data.
+        # self.data_line2.setData(self.x, self.y)  # Update the data.
 
     def getTimer(self):
         """
@@ -132,6 +137,13 @@ class View(QMainWindow):
         if txt == '8':
             self.launchpadState.setText('Abort')
             self.launchpadState.setStyleSheet('background-color: rgb(255, 0, 0); font: 87 18pt "Arial Black";')
+
+    def setVerticalSlider(self, data):
+        if data < 0:
+            data = 0
+        self.verticalSlider.setValue(data)
+        self.altitudeLabel.setText(str(data) + 'm')
+        self.altitudeLabel.setStyleSheet('font: 87 26pt "Arial Black"; color: rgb(255, 255, 255);')
 
 
 if __name__ == '__main__':
