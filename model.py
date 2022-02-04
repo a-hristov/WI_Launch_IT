@@ -48,7 +48,7 @@ class Model:
         Send an 'ejection' String to the Serial Port
         :return:
         """
-        self.writeToArduino('ejection')
+        self.writeToArduino('eject')
 
     def initMode(self):
         """
