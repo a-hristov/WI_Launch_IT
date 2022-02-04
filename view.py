@@ -31,6 +31,7 @@ class View(QMainWindow):
 
         c.check_serial_event()
         self.plotSetup(0.0)
+        #self.plotSetup2()
 
     def updateConsole(self, text):
         self.console.append(str(text))
@@ -38,28 +39,157 @@ class View(QMainWindow):
     def plotSetup(self, data):
         self.x = list(range(100))  # 100 time points
         self.y = [0 for _ in range(100)]  # 100 data points
+
+        self.accelZx = self.x
+        self.xAxisx = self.x
+        self.yAxisx = self.x
+        self.servoXx = self.x
+        self.servoYx = self.x
+        self.rollx = self.x
+
+        self.accelZy = self.y
+        self.xAxisy = self.y
+        self.yAxisy = self.y
+        self.servoXy = self.y
+        self.servoYy = self.y
+        self.rolly = self.y
+
+
+
         pen = pg.mkPen(color=(255, 0, 0))
-        self.data_line1 = self.graph1.plot(self.x, self.y, pen=pen)
-        # self.data_line2 = self.graph2.plot(self.x, self.y, pen=pen)
-        self.data_line3 = self.xAxisGraph.plot(self.x, self.y, pen=pen)
-        self.data_line4 = self.yAxisGraph.plot(self.x, self.y, pen=pen)
-        self.data_line5 = self.servoX.plot(self.x, self.y, pen=pen)
-        self.data_line6 = self.servoY.plot(self.x, self.y, pen=pen)
+        self.data_line1 = self.graph1.plot(self.accelZx, self.accelZy, pen=pen) # accelZ
+        self.data_line2 = self.graph2.plot(self.xAxisx, self.xAxisy, pen=pen) # roll
+        self.data_line3 = self.xAxisGraph.plot(self.yAxisx, self.yAxisy, pen=pen)
+        self.data_line4 = self.yAxisGraph.plot(self.servoXx, self.servoXy, pen=pen)
+        self.data_line5 = self.servoX.plot(self.servoYx, self.servoYy, pen=pen)
+        self.data_line6 = self.servoY.plot(self.rollx, self.rolly, pen=pen)
         self.graph1.setTitle('Acceleration Z')
+        self.graph2.setTitle('Roll')
+        self.xAxisGraph.setTitle('Position on X Axis')
+        self.yAxisGraph.setTitle('Position on Y Axis')
+        self.servoX.setTitle('Servo X')
+        self.servoY.setTitle('Servo Y')
         self.timer = QtCore.QTimer()
         self.timer.setInterval(50)
-        self.timer.timeout.connect(self.update_plot_data)
+        self.timer.timeout.connect(self.update_accelZ_plot_data)
+        self.timer.timeout.connect(self.update_xAxisGraph_plot_data)
+        self.timer.timeout.connect(self.update_yAxisGraph_plot_data)
+        self.timer.timeout.connect(self.update_servoX_plot_data)
+        self.timer.timeout.connect(self.update_servoY_plot_data)
+        self.timer.timeout.connect(self.update_roll_plot_data)
+
+
         self.timer.start()
+    '''
+    def plotSetup2(self):
+        self.x2 = list(range(100))  # 100 time points
+        self.y2 = [0 for _ in range(100)]  # 100 data points
 
-    def update_plot_data(self, accelZ):
-        self.x = self.x[1:]  # Remove the first y element.
-        self.x.append(self.x[-1] + 1)  # Add a new value 1 higher than the last.
+        self.xAxisx = self.x
+        self.xAxisy = self.y
 
-        self.accelZy = self.y[1:]  # Remove the first
-        self.accelZy.append(accelZ)  # Add a new random value.
+        pen = pg.mkPen(color=(255, 0, 0))
+        self.data_line3 = self.xAxisGraph.plot(self.x, self.y, pen=pen)
+        self.timer1 = QtCore.QTimer()
+        self.timer1.setInterval(50)
+        self.timer.timeout.connect(self.update_xAxisGraph_plot_data)
+        self.timer.start()
+    '''
 
-        self.data_line1.setData(self.x, self.accelZy)  # Update the data.
-        # self.data_line2.setData(self.x, self.y)  # Update the data.
+    def update_accelZ_plot_data(self, accelZ, xAxis, yAxis, servoX, servoY, roll):
+        if accelZ != -99991234.337:
+            self.accelZx = self.accelZx[1:]  # Remove the first y element.
+            self.accelZx.append(self.accelZx[-1] + 1)  # Add a new value 1 higher than the last.
+
+            self.accelZy = self.accelZy[1:]  # Remove the first
+            self.accelZy.append(accelZ)  # Add a new random value.
+
+            self.data_line1.setData(self.accelZx, self.accelZy)  # Update the data.
+        if xAxis != -99991234.337:
+            self.xAxisx = self.xAxisx[1:]  # Remove the first y element.
+            self.xAxisx.append(self.xAxisx[-1] + 1)  # Add a new value 1 higher than the last.
+
+            self.xAxisy = self.xAxisy[1:]  # Remove the first
+            self.xAxisy.append(xAxis)  # Add a new random value.
+
+            self.data_line3.setData(self.xAxisx, self.xAxisy)  # Update the data.
+        if yAxis != -99991234.337:
+            self.yAxisx = self.yAxisx[1:]  # Remove the first y element.
+            self.yAxisx.append(self.yAxisx[-1] + 1)  # Add a new value 1 higher than the last.
+
+            self.yAxisy = self.yAxisy[1:]  # Remove the first
+            self.yAxisy.append(yAxis)  # Add a new random value.
+
+            self.data_line4.setData(self.yAxisx, self.yAxisy)  # Update the data.
+        if servoX != -99991234.337:
+            self.servoXx = self.servoXx[1:]  # Remove the first y element.
+            self.servoXx.append(self.servoXx[-1] + 1)  # Add a new value 1 higher than the last.
+
+            self.servoXy = self.servoXy[1:]  # Remove the first
+            self.servoXy.append(servoX)  # Add a new random value.
+
+            self.data_line5.setData(self.servoXx, self.servoXy)  # Update the data.
+        if servoY != -99991234.337:
+            self.servoYx = self.servoYx[1:]  # Remove the first y element.
+            self.servoYx.append(self.servoYx[-1] + 1)  # Add a new value 1 higher than the last.
+
+            self.servoYy = self.servoYy[1:]  # Remove the first
+            self.servoYy.append(servoY)  # Add a new random value.
+
+            self.data_line6.setData(self.servoYx, self.servoYy)  # Update the data.
+        if roll != -99991234.337:
+            self.rollx = self.rollx[1:]  # Remove the first y element.
+            self.rollx.append(self.rollx[-1] + 1)  # Add a new value 1 higher than the last.
+
+            self.rolly = self.rolly[1:]  # Remove the first
+            self.rolly.append(roll)  # Add a new random value.
+
+            self.data_line2.setData(self.rollx, self.rolly)  # Update the data.
+
+    def update_xAxisGraph_plot_data(self, xAxis):
+        self.xAxisx = self.xAxisx[1:]  # Remove the first y element.
+        self.xAxisx.append(self.xAxisx[-1] + 1)  # Add a new value 1 higher than the last.
+
+        self.xAxisy = self.xAxisy[1:]  # Remove the first
+        self.xAxisy.append(xAxis)  # Add a new random value.
+
+        self.data_line3.setData(self.xAxisx, self.xAxisy)  # Update the data.
+
+    def update_yAxisGraph_plot_data(self, yAxis):
+        self.yAxisx = self.yAxisx[1:]  # Remove the first y element.
+        self.yAxisx.append(self.yAxisx[-1] + 1)  # Add a new value 1 higher than the last.
+
+        self.yAxisy = self.yAxisy[1:]  # Remove the first
+        self.yAxisy.append(yAxis)  # Add a new random value.
+
+        self.data_line4.setData(self.yAxisx, self.yAxisy)  # Update the data.
+
+    def update_servoX_plot_data(self, servoX):
+        self.servoXx = self.servoXx[1:]  # Remove the first y element.
+        self.servoXx.append(self.servoXx[-1] + 1)  # Add a new value 1 higher than the last.
+
+        self.servoXy = self.servoXy[1:]  # Remove the first
+        self.servoXy.append(servoX)  # Add a new random value.
+
+        self.data_line5.setData(self.servoXx, self.servoXy)  # Update the data.
+
+    def update_servoY_plot_data(self, servoY):
+        self.servoYx = self.servoYx[1:]  # Remove the first y element.
+        self.servoYx.append(self.servoYx[-1] + 1)  # Add a new value 1 higher than the last.
+
+        self.servoYy = self.accelZy[1:]  # Remove the first
+        self.servoYy.append(servoY)  # Add a new random value.
+
+        self.data_line6.setData(self.servoYx, self.servoYy)  # Update the data.
+
+    def update_roll_plot_data(self, roll):
+        self.rollx = self.rollx[1:]  # Remove the first y element.
+        self.rollx.append(self.rollx[-1] + 1)  # Add a new value 1 higher than the last.
+
+        self.rolly = self.rolly[1:]  # Remove the first
+        self.rolly.append(roll)  # Add a new random value.
+
+        self.data_line2.setData(self.rollx, self.rolly)  # Update the data.
 
     def getTimer(self):
         """

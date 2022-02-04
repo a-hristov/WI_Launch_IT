@@ -22,7 +22,6 @@ class Controller():
         self.m = model.Model()
         self.v = view.View(self, app)
 
-
     def ejection(self):
         """
         Method to execute the Models chuteEjecton method
@@ -89,16 +88,24 @@ class Controller():
                 line = line.rstrip()
                 distance = line.decode("utf-8")
                 if distance.startswith('message from rocket 0: +++'):
-                    try:
-                        start = distance.find("message from rocket 0: +++ ") + len("message from rocket 0: +++ ")
-                        end = distance.find(",")
-                        substring = distance[start:end]
-                        print(substring)
-                        self.v.update_plot_data(float(substring))
-                    except TypeError:
-                        print('oh no, ... anyways')
+                    start = distance.find("message from rocket 0: +++ ") + len("message from rocket 0: +++ ")
+                    end = distance.find(",")
+                    substring = distance[start:end]
+                    print(substring)
                     x = distance.split(',')
+                    # self.v.update_xAxisGraph_plot_data(float(x[-1]))
+                    print(float(x[-1]))
+                    self.v.update_accelZ_plot_data(float(substring), float(x[-1]), -99991234.337, -99991234.337, -99991234.337, -99991234.337)
+
                     self.v.setVerticalSlider(int(x[-2]))
+
+                if distance.startswith('message from rocket 0: ~~~'):
+                    start = distance.find("message from rocket 0: ~~~ ") + len("message from rocket 0: ~~~ ")
+                    end = distance.find(",")
+                    substring = distance[start:end]
+                    x = distance.split(',')
+                    self.v.update_accelZ_plot_data(-99991234.337, -99991234.337, float(substring), float(x[-3]), float(x[-2]), float(x[-1]))
+
                 if distance == 'message from rocket 0: connection established':
                     self.v.setRocketState('1')
                 if distance == 'message from rocket 0: GPS gets signal':
