@@ -95,7 +95,8 @@ class Controller():
                     x = distance.split(',')
                     # self.v.update_xAxisGraph_plot_data(float(x[-1]))
                     print(float(x[-1]))
-                    self.v.update_accelZ_plot_data(float(substring), float(x[-1]), -99991234.337, -99991234.337, -99991234.337, -99991234.337)
+                    if isinstance(float(substring), float) and isinstance(float(x[-1]), float):
+                        self.v.update_accelZ_plot_data(float(substring), float(x[-1]), -99991234.337, -99991234.337, -99991234.337, -99991234.337)
 
                     self.v.setVerticalSlider(float(x[-2]))
 
@@ -104,7 +105,8 @@ class Controller():
                     end = distance.find(",")
                     substring = distance[start:end]
                     x = distance.split(',')
-                    self.v.update_accelZ_plot_data(-99991234.337, -99991234.337, float(substring), float(x[-3]), float(x[-2]), float(x[-1]))
+                    if isinstance(float(substring), float) and isinstance(float(x[-3]), float) and isinstance(float(x[-2]), float) and isinstance(float(x[-1]), float):
+                        self.v.update_accelZ_plot_data(-99991234.337, -99991234.337, float(substring), float(x[-3]), float(x[-2]), float(x[-1]))
 
                 if distance == 'message from rocket 0: connection established':
                     self.v.setRocketState('1')

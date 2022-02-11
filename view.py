@@ -67,11 +67,11 @@ class View(QMainWindow):
         self.yAxisGraph.setTitle('Position on Y Axis')
         self.servoX.setTitle('Servo X')
         self.servoY.setTitle('Servo Y')
-        self.timer = QtCore.QTimer()
-        self.timer.setInterval(50)
-        self.timer.timeout.connect(self.update_accelZ_plot_data)
+        # self.timer = QtCore.QTimer()
+        # self.timer.setInterval(50)
+        # self.timer.timeout.connect(self.update_accelZ_plot_data)
 
-        self.timer.start()
+        # self.timer.start()
 
     '''
     def plotSetup2(self):
@@ -89,7 +89,7 @@ class View(QMainWindow):
         self.timer.start()
     '''
 
-    def update_accelZ_plot_data(self, accelZ, xAxis, yAxis, servoX, servoY, roll):
+    def update_accelZ_plot_data(self, accelZ: float, xAxis: float, yAxis: float, servoX: float, servoY: float, roll: float):
         if accelZ != -99991234.337:
             self.accelZx = self.accelZx[1:]  # Remove the first y element.
             self.accelZx.append(self.accelZx[-1] + 1)  # Add a new value 1 higher than the last.
