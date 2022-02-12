@@ -3,9 +3,9 @@ import time
 from random import randint
 
 import serial
-from PyQt6 import uic, QtCore
-from PyQt6.QtCore import QThread, QObject, pyqtSignal
-from PyQt6.QtWidgets import QMainWindow, QApplication
+from PyQt5 import uic, QtCore
+from PyQt5.QtCore import QThread, QObject, pyqtSignal
+from PyQt5.QtWidgets import QMainWindow, QApplication
 from pip._vendor.msgpack.fallback import xrange
 from controller import Controller
 from pyqtgraph import PlotWidget, plot

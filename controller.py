@@ -6,7 +6,7 @@ from threading import Thread
 from PyQt6.QtCore import QThread, pyqtSignal, QObject
 
 import constant
-from PyQt6.QtWidgets import QApplication
+from PyQt5.QtWidgets import QApplication
 
 import model
 import view
