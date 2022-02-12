@@ -56,6 +56,8 @@ class Controller():
         """
         self.m.abort()
         self.v.setLcdNumber(0)
+        self.v.setRocketState('8')
+        self.v.setLaunchpadState('8')
 
     def readArduino(self):
         while True:
