@@ -197,15 +197,18 @@ class View(QMainWindow):
         :param x: the timer
         """
         for i in xrange(int(x), -1, -1):
-            if int(x) <= 0:
+            if int(x) < 0:
                 break
             print(i)
 
             self.lcdNumber.display(i)
             start = time.time()
-            while time.time() - start < 1:
-                self.app.processEvents()
-                time.sleep(0.02)
+            if int(x) >= 0:
+                while time.time() - start < 1:
+                    self.app.processEvents()
+                    time.sleep(0.02)
+            else:
+                break
 
         print('boom')
 
