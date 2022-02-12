@@ -197,6 +197,8 @@ class View(QMainWindow):
         :param x: the timer
         """
         for i in xrange(int(x), -1, -1):
+            if int(x) <= 0:
+                break
             print(i)
 
             self.lcdNumber.display(i)
