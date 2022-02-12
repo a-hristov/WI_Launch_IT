@@ -64,9 +64,9 @@ class Controller():
             self.v.updateConsole(self.m.readFromArduino())
 
     def check_serial_event(self):
-        self.timeout = 0
+        # self.timeout = 0
 
-        self.timeout += 1
+        # self.timeout += 1
         # print (self.timeout)
         serial_thread = threading.Timer(0.05, self.check_serial_event)
         if self.m.arduino.is_open:
@@ -124,10 +124,10 @@ class Controller():
                     self.v.setLaunchpadState('2')
                 self.v.console.append(distance + '\n')
                 # print (distance)
-                self.timeout = 0
+                # self.timeout = 0
 
-        if self.timeout >= 10:
-            self.m.arduino.close()
+        # if self.timeout >= 10:
+            # self.m.arduino.close()
 
 
 if __name__ == '__main__':
