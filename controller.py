@@ -3,7 +3,7 @@ import threading
 import time
 from threading import Thread
 
-from PyQt6.QtCore import QThread, pyqtSignal, QObject
+from PyQt5.QtCore import QThread, pyqtSignal, QObject
 
 import constant
 from PyQt5.QtWidgets import QApplication
