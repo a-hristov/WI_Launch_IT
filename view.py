@@ -229,7 +229,7 @@ class View(QMainWindow):
             self.rocketState.setStyleSheet('background-color: rgb(0, 255, 0); font: 87 18pt "Arial Black";')
         if txt == '3':
             self.rocketState.setText('ongoing \ncountdown')  # changed from 'while countdown' because of preference
-            self.rocketState.setStyleSheet('background-color: rgb(255, 255, 255); font: 87 18pt "Arial Black";')
+            self.rocketState.setStyleSheet('background-color: rgb(255, 255, 0); font: 87 18pt "Arial Black";')
         if txt == '4':
             self.rocketState.setText('Detect Liftoff')
             self.rocketState.setStyleSheet('background-color: rgb(87, 109, 255); font: 87 18pt "Arial Black";')
@@ -261,7 +261,7 @@ class View(QMainWindow):
             self.launchpadState.setStyleSheet('background-color: rgb(0, 255, 0); font: 87 18pt "Arial Black";')
         if txt == '3':
             self.launchpadState.setText('ongoing \ncountdown')  # changed from 'while countdown' because of preference
-            self.launchpadState.setStyleSheet('background-color: rgb(255, 255, 255); font: 87 18pt "Arial Black";')
+            self.launchpadState.setStyleSheet('background-color: rgb(255, 255, 0); font: 87 18pt "Arial Black";')
         if txt == '4':
             self.launchpadState.setText('Ignition')
             self.launchpadState.setStyleSheet('background-color: rgb(87, 109, 255); font: 87 18pt "Arial Black";')
