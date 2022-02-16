@@ -10,6 +10,11 @@ from pip._vendor.msgpack.fallback import xrange
 from controller import Controller
 from pyqtgraph import PlotWidget, plot
 import pyqtgraph as pg
+import sys
+import os
+
+
+
 
 
 class View(QMainWindow):
@@ -28,10 +33,30 @@ class View(QMainWindow):
         self.b_abort.setEnabled(False)
         self.b_init.clicked.connect(c.init)
         self.app = app
+        '''
+        try:
+            c.check_serial_event()
 
-        c.check_serial_event()
+        except AttributeError as ae:
+            print("AttributeError")
+        '''
+        # self.startTheThread()
         self.plotSetup(0.0)
         # self.plotSetup2()
+
+    def theCallbackFunc(self, msg):
+        print('the thread has sent this message to the GUI:')
+        print(msg)
+        print('---------')
+
+    ''''''
+
+    def startTheThread(self, cc):
+        # Create the new thread. The target function is 'myThread'. The
+        # function we created in the beginning.
+        t = threading.Thread(name = 'myThread', target = cc.myThread, args = (self.theCallbackFunc,))
+        t.start()
+
 
     def updateConsole(self, text):
         self.console.append(str(text))
@@ -90,7 +115,7 @@ class View(QMainWindow):
     '''
 
     def update_accelZ_plot_data(self, accelZ: float, xAxis: float, yAxis: float, servoX: float, servoY: float, roll: float):
-        if accelZ != -99991234.337:
+        if accelZ != -1234.337:
             self.accelZx = self.accelZx[1:]  # Remove the first y element.
             self.accelZx.append(self.accelZx[-1] + 1)  # Add a new value 1 higher than the last.
 
@@ -98,7 +123,7 @@ class View(QMainWindow):
             self.accelZy.append(accelZ)  # Add a new random value.
 
             self.data_line1.setData(self.accelZx, self.accelZy)  # Update the data.
-        if xAxis != -99991234.337:
+        if xAxis != -1234.337:
             self.xAxisx = self.xAxisx[1:]  # Remove the first y element.
             self.xAxisx.append(self.xAxisx[-1] + 1)  # Add a new value 1 higher than the last.
 
@@ -106,7 +131,7 @@ class View(QMainWindow):
             self.xAxisy.append(xAxis)  # Add a new random value.
 
             self.data_line3.setData(self.xAxisx, self.xAxisy)  # Update the data.
-        if yAxis != -99991234.337:
+        if yAxis != -1234.337:
             self.yAxisx = self.yAxisx[1:]  # Remove the first y element.
             self.yAxisx.append(self.yAxisx[-1] + 1)  # Add a new value 1 higher than the last.
 
@@ -114,7 +139,7 @@ class View(QMainWindow):
             self.yAxisy.append(yAxis)  # Add a new random value.
 
             self.data_line4.setData(self.yAxisx, self.yAxisy)  # Update the data.
-        if servoX != -99991234.337:
+        if servoX != -1234.337:
             self.servoXx = self.servoXx[1:]  # Remove the first y element.
             self.servoXx.append(self.servoXx[-1] + 1)  # Add a new value 1 higher than the last.
 
@@ -122,7 +147,7 @@ class View(QMainWindow):
             self.servoXy.append(servoX)  # Add a new random value.
 
             self.data_line5.setData(self.servoXx, self.servoXy)  # Update the data.
-        if servoY != -99991234.337:
+        if servoY != -1234.337:
             self.servoYx = self.servoYx[1:]  # Remove the first y element.
             self.servoYx.append(self.servoYx[-1] + 1)  # Add a new value 1 higher than the last.
 
@@ -130,7 +155,7 @@ class View(QMainWindow):
             self.servoYy.append(servoY)  # Add a new random value.
 
             self.data_line6.setData(self.servoYx, self.servoYy)  # Update the data.
-        if roll != -99991234.337:
+        if roll != -1234.337:
             self.rollx = self.rollx[1:]  # Remove the first y element.
             self.rollx.append(self.rollx[-1] + 1)  # Add a new value 1 higher than the last.
 

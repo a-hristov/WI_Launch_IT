@@ -1,2 +1,2 @@
 # launch time in seconds
-LAUNCH_TIME = 10
+LAUNCH_TIME = 120
