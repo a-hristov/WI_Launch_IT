@@ -12,7 +12,7 @@ class Model:
         arduino: the serial port on which the arduino is connected to the computer
         """
 
-        self.arduino = serial.Serial('COM8', baudrate=9600, timeout=10)
+        self.arduino = serial.Serial('COM5', baudrate=9600, timeout=10)
 
         # Comment this line if you want to test GUI
 
